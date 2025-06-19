@@ -1,7 +1,10 @@
 package com.hospital.model;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 public class Box {
@@ -11,12 +14,10 @@ public class Box {
     private Long id;
 
     private String nombre;
-
     private int piso;
-
     private boolean disponible;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Horario horario;
 
     // --- Métodos de dominio ---
@@ -31,14 +32,27 @@ public class Box {
 
     public boolean estaDisponible(LocalDateTime fechaHora) {
         if (!disponible) return false;
-        return horario != null && horario.estaDisponible(fechaHora);
+        if (horario == null) return true; // Si no tiene horario, está disponible siempre
+        
+        LocalDate fecha = fechaHora.toLocalDate();
+        LocalTime hora = fechaHora.toLocalTime();
+        return horario.estaDisponible(fecha, hora);
     }
 
     public void modificar(Box nuevoBox) {
         this.nombre = nuevoBox.getNombre();
         this.piso = nuevoBox.getPiso();
         this.disponible = nuevoBox.isDisponible();
-        this.horario = nuevoBox.getHorario();
+        if (nuevoBox.getHorario() != null) {
+            if (this.horario == null) {
+                this.horario = new Horario();
+            }
+            this.horario.setHoraInicio(nuevoBox.getHorario().getHoraInicio());
+            this.horario.setHoraFin(nuevoBox.getHorario().getHoraFin());
+            this.horario.setDiasDisponibles(nuevoBox.getHorario().getDiasDisponibles());
+        } else {
+            this.horario = null;
+        }
     }
 
     // --- Getters y Setters ---
