@@ -1,0 +1,249 @@
+.historical-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  .header {
+    margin-bottom: 2rem;
+    
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      font-size: 1.8rem;
+    }
+    
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 8px;
+      
+      .filter-group {
+        display: flex;
+        flex-direction: column;
+        min-width: 200px;
+        
+        label {
+          margin-bottom: 0.5rem;
+          font-weight: 500;
+          color: #34495e;
+          font-size: 0.9rem;
+        }
+        
+        .filter-select {
+          padding: 0.5rem 1rem;
+          border: 1px solid #ddd;
+          border-radius: 6px;
+          background-color: white;
+          font-size: 0.95rem;
+          
+          &:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+          }
+        }
+      }
+      
+      .filter-btn {
+        padding: 0.5rem 1.5rem;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-weight: 500;
+        align-self: flex-end;
+        
+        &:hover {
+          background-color: #2980b9;
+        }
+      }
+    }
+  }
+  
+  .evaluations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+    
+    .evaluation-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      }
+      
+      .card-header {
+        display: flex;
+        align-items: center;
+        padding: 1.5rem;
+        background-color: #f1f8fe;
+        border-bottom: 1px solid #e0e0e0;
+        gap: 1rem;
+        
+        .professor-avatar {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 3px solid #3498db;
+        }
+        
+        .professor-info {
+          flex-grow: 1;
+          
+          h3 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 1.2rem;
+          }
+          
+          .course-year {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.3rem;
+
+            .course-badge {
+              background-color: #e8f4fc;
+              color: #2980b9;
+              padding: 0.2rem 0.5rem;
+              border-radius: 4px;
+              font-size: 0.8rem;
+              font-weight: 500;
+            }
+
+            .year-badge {
+              background-color: #f0f0f0;
+              color: #7f8c8d;
+              padding: 0.2rem 0.5rem;
+              border-radius: 4px;
+              font-size: 0.8rem;
+            }
+
+            .semester-badge {
+              background-color: #f9e79f;
+              color: #b7950b;
+              padding: 0.2rem 0.5rem;
+              border-radius: 4px;
+              font-size: 0.8rem;
+              font-weight: 500;
+            }
+          }
+        }
+        
+        .average-score {
+          display: flex;
+          align-items: baseline;
+          
+          .score {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #3498db;
+          }
+          
+          .max {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-left: 0.3rem;
+          }
+        }
+      }
+      
+      .metrics-container {
+        padding: 1.5rem;
+        
+        .metric {
+          margin-bottom: 1rem;
+          
+          .metric-name {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #34495e;
+            font-size: 0.95rem;
+          }
+          
+          .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            
+            .progress-bar {
+              height: 8px;
+              background-color: #3498db;
+              border-radius: 4px;
+              min-width: 0;
+              transition: width 0.5s ease;
+            }
+            
+            .metric-value {
+              font-weight: 600;
+              color: #2c3e50;
+              min-width: 30px;
+              text-align: right;
+            }
+          }
+        }
+      }
+      
+      .comments-section {
+        padding: 0 1.5rem 1.5rem;
+        border-top: 1px dashed #eee;
+        margin-top: 0.5rem;
+        
+        h4 {
+          margin: 0 0 0.5rem 0;
+          color: #34495e;
+          font-size: 1rem;
+        }
+        
+        .comment-text {
+          margin: 0;
+          color: #555;
+          font-style: italic;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+  
+  .no-results {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    color: #7f8c8d;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .historical-container {
+    padding: 1rem;
+    
+    .header .filters {
+      flex-direction: column;
+      align-items: stretch;
+      
+      .filter-btn {
+        align-self: stretch;
+      }
+    }
+    
+    .evaluations-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}

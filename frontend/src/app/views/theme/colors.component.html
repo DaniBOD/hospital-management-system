@@ -1,0 +1,15 @@
+<c-card class="mb-4">
+  <c-card-header>
+    Evaluaciones
+  </c-card-header>
+  <c-card-body>
+    <c-row *ngFor="let asignatura of asignaturas" class="mb-2 align-items-center">
+      <c-col sm="6">
+        <strong>{{ asignatura.nombre }}</strong>
+      </c-col>
+      <c-col sm="6">
+        <span class="badge bg-primary" style="font-size: 1rem;">{{ asignatura.nota }}</span>
+      </c-col>
+    </c-row>
+  </c-card-body>
+</c-card>

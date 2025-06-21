@@ -1,0 +1,232 @@
+<div class="encuesta-container">
+  <div class="encuesta-header">
+    <h2>Evaluación de Cursos</h2>
+    <p>Califique el curso según los siguientes aspectos (1 = Muy malo, 7 = Excelente)</p>
+  </div>
+
+  <form (ngSubmit)="submitForm()" class="encuesta-form">
+    <h3 class="text-center">Ingles III</h3>
+    <div class="pregunta" *ngFor="let pregunta of preguntas; let i = index">
+      <h3 class="pregunta-texto">{{ i + 1 }}. {{ pregunta.texto }}</h3>
+      
+      <div class="escala-numerica">
+        @for (num of [1, 2, 3, 4, 5, 6, 7]; track num) {
+          <div class="opcion-numero">
+            <input 
+              type="radio" 
+              [id]="'p' + i + 'n' + num" 
+              [name]="'pregunta' + i" 
+              [(ngModel)]="pregunta.respuesta" 
+              [value]="num"
+              required
+            >
+            <label [for]="'p' + i + 'n' + num">{{ num }}</label>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="comentarios-section">
+      <h3>Comentarios adicionales</h3>
+      <textarea 
+        class="comentarios-input" 
+        [(ngModel)]="comentarios" 
+        name="comentarios" 
+        placeholder="Escribe tus comentarios, sugerencias u observaciones aquí..."
+      ></textarea>
+    </div>
+
+    <div class="encuesta-actions">
+      <button type="submit" class="submit-btn">Enviar Evaluación</button>
+    </div>
+  </form>
+
+  <form (ngSubmit)="submitForm()" class="encuesta-form">
+    <h3 class="text-center">Paradigmas de la programación</h3>
+    <div class="pregunta" *ngFor="let pregunta of preguntas; let i = index">
+      <h3 class="pregunta-texto">{{ i + 1 }}. {{ pregunta.texto }}</h3>
+      
+      <div class="escala-numerica">
+        @for (num of [1, 2, 3, 4, 5, 6, 7]; track num) {
+          <div class="opcion-numero">
+            <input 
+              type="radio" 
+              [id]="'p' + i + 'n' + num" 
+              [name]="'pregunta' + i" 
+              [(ngModel)]="pregunta.respuesta" 
+              [value]="num"
+              required
+            >
+            <label [for]="'p' + i + 'n' + num">{{ num }}</label>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="comentarios-section">
+      <h3>Comentarios adicionales</h3>
+      <textarea 
+        class="comentarios-input" 
+        [(ngModel)]="comentarios" 
+        name="comentarios" 
+        placeholder="Escribe tus comentarios, sugerencias u observaciones aquí..."
+      ></textarea>
+    </div>
+
+    <div class="encuesta-actions">
+      <button type="submit" class="submit-btn">Enviar Evaluación</button>
+    </div>
+  </form>
+
+  <form (ngSubmit)="submitForm()" class="encuesta-form">
+    <h3 class="text-center">Electricidad y magnetismo</h3>
+    <div class="pregunta" *ngFor="let pregunta of preguntas; let i = index">
+      <h3 class="pregunta-texto">{{ i + 1 }}. {{ pregunta.texto }}</h3>
+      
+      <div class="escala-numerica">
+        @for (num of [1, 2, 3, 4, 5, 6, 7]; track num) {
+          <div class="opcion-numero">
+            <input 
+              type="radio" 
+              [id]="'p' + i + 'n' + num" 
+              [name]="'pregunta' + i" 
+              [(ngModel)]="pregunta.respuesta" 
+              [value]="num"
+              required
+            >
+            <label [for]="'p' + i + 'n' + num">{{ num }}</label>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="comentarios-section">
+      <h3>Comentarios adicionales</h3>
+      <textarea 
+        class="comentarios-input" 
+        [(ngModel)]="comentarios" 
+        name="comentarios" 
+        placeholder="Escribe tus comentarios, sugerencias u observaciones aquí..."
+      ></textarea>
+    </div>
+
+    <div class="encuesta-actions">
+      <button type="submit" class="submit-btn">Enviar Evaluación</button>
+    </div>
+  </form>
+
+  <form (ngSubmit)="submitForm()" class="encuesta-form">
+    <h3 class="text-center">Base de datos</h3>
+    <div class="pregunta" *ngFor="let pregunta of preguntas; let i = index">
+      <h3 class="pregunta-texto">{{ i + 1 }}. {{ pregunta.texto }}</h3>
+      
+      <div class="escala-numerica">
+        @for (num of [1, 2, 3, 4, 5, 6, 7]; track num) {
+          <div class="opcion-numero">
+            <input 
+              type="radio" 
+              [id]="'p' + i + 'n' + num" 
+              [name]="'pregunta' + i" 
+              [(ngModel)]="pregunta.respuesta" 
+              [value]="num"
+              required
+            >
+            <label [for]="'p' + i + 'n' + num">{{ num }}</label>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="comentarios-section">
+      <h3>Comentarios adicionales</h3>
+      <textarea 
+        class="comentarios-input" 
+        [(ngModel)]="comentarios" 
+        name="comentarios" 
+        placeholder="Escribe tus comentarios, sugerencias u observaciones aquí..."
+      ></textarea>
+    </div>
+
+    <div class="encuesta-actions">
+      <button type="submit" class="submit-btn">Enviar Evaluación</button>
+    </div>
+  </form>
+
+  <form (ngSubmit)="submitForm()" class="encuesta-form">
+    <h3 class="text-center">Calculo III</h3>
+    <div class="pregunta" *ngFor="let pregunta of preguntas; let i = index">
+      <h3 class="pregunta-texto">{{ i + 1 }}. {{ pregunta.texto }}</h3>
+      
+      <div class="escala-numerica">
+        @for (num of [1, 2, 3, 4, 5, 6, 7]; track num) {
+          <div class="opcion-numero">
+            <input 
+              type="radio" 
+              [id]="'p' + i + 'n' + num" 
+              [name]="'pregunta' + i" 
+              [(ngModel)]="pregunta.respuesta" 
+              [value]="num"
+              required
+            >
+            <label [for]="'p' + i + 'n' + num">{{ num }}</label>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="comentarios-section">
+      <h3>Comentarios adicionales</h3>
+      <textarea 
+        class="comentarios-input" 
+        [(ngModel)]="comentarios" 
+        name="comentarios" 
+        placeholder="Escribe tus comentarios, sugerencias u observaciones aquí..."
+      ></textarea>
+    </div>
+
+    <div class="encuesta-actions">
+      <button type="submit" class="submit-btn">Enviar Evaluación</button>
+    </div>
+  </form>
+
+  <form (ngSubmit)="submitForm()" class="encuesta-form">
+    <h3 class="text-center">Estructura y algoritmos</h3>
+    <div class="pregunta" *ngFor="let pregunta of preguntas; let i = index">
+      <h3 class="pregunta-texto">{{ i + 1 }}. {{ pregunta.texto }}</h3>
+      
+      <div class="escala-numerica">
+        @for (num of [1, 2, 3, 4, 5, 6, 7]; track num) {
+          <div class="opcion-numero">
+            <input 
+              type="radio" 
+              [id]="'p' + i + 'n' + num" 
+              [name]="'pregunta' + i" 
+              [(ngModel)]="pregunta.respuesta" 
+              [value]="num"
+              required
+            >
+            <label [for]="'p' + i + 'n' + num">{{ num }}</label>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="comentarios-section">
+      <h3>Comentarios adicionales</h3>
+      <textarea 
+        class="comentarios-input" 
+        [(ngModel)]="comentarios" 
+        name="comentarios" 
+        placeholder="Escribe tus comentarios, sugerencias u observaciones aquí..."
+      ></textarea>
+    </div>
+
+    <div class="encuesta-actions">
+      <button type="submit" class="submit-btn">Enviar Evaluación</button>
+    </div>
+
+    <div class="encuesta-actions">
+      <button type="button" class="submit-btn" (click)="volverInicio()">Volver al inicio</button>
+    </div>
+  </form>
+</div>

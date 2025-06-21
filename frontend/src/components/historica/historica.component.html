@@ -1,0 +1,69 @@
+<div class="historical-container">
+  <div class="header">
+    <h2>Histórico de Evaluaciones Docentes</h2>
+    <div class="filters">
+      <div class="filter-group">
+        <label for="professor">Filtrar por profesor:</label>
+        <select id="professor" [(ngModel)]="selectedProfessorId" class="filter-select">
+          <option value="">Todos los profesores</option>
+          <option *ngFor="let prof of professors" [value]="prof.id">{{ prof.name }}</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="year">Filtrar por año:</label>
+        <select id="year" [(ngModel)]="selectedYear" class="filter-select">
+          <option value="">Todos los años</option>
+          <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="semester">Filtrar por semestre:</label>
+        <select id="semester" [(ngModel)]="selectedSemester" class="filter-select">
+          <option value="">Todos los semestres</option>
+          <option value="S1">Semestre 1</option>
+          <option value="S2">Semestre 2</option>
+        </select>
+      </div>
+      <button class="filter-btn" (click)="applyFilters()">Aplicar Filtros</button>
+    </div>
+  </div>
+
+  <div class="evaluations-grid">
+    <div class="evaluation-card" *ngFor="let evaluation of filteredEvaluations">
+      <div class="card-header">
+        <img [src]="evaluation.professor.avatar" alt="Avatar" class="professor-avatar">
+        <div class="professor-info">
+          <h3>{{ evaluation.professor.name }}</h3>
+          <div class="course-year">
+            <span class="course-badge">{{ evaluation.course }}</span>
+            <span class="year-badge">{{ evaluation.year }}</span>
+            <span class="semester-badge">
+              {{ evaluation.semester === 'S1' ? 'S1' : (evaluation.semester === 'S2' ? 'S2' : evaluation.semester) }}
+            </span>
+          </div>
+        </div>
+        <div class="average-score">
+          <span class="score">{{ evaluation.average | number:'1.1-1' }}</span>
+          <span class="max">/7.0</span>
+        </div>
+      </div>
+      <div class="metrics-container">
+        <div class="metric" *ngFor="let metric of evaluation.metrics">
+          <span class="metric-name">{{ metric.name }}</span>
+          <div class="progress-container">
+            <div class="progress-bar" [style.width.%]="(metric.score / 7) * 100"></div>
+            <span class="metric-value">{{ metric.score | number:'1.1-1' }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="comments-section" *ngIf="evaluation.comments">
+        <h4>Comentarios:</h4>
+        <p class="comment-text">"{{ evaluation.comments }}"</p>
+      </div>
+    </div>
+  </div>
+  <div class="no-results" *ngIf="filteredEvaluations.length === 0">
+    <p>No se encontraron evaluaciones con los filtros seleccionados</p>
+  </div>
+</div>
+
