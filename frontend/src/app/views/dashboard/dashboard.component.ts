@@ -35,7 +35,7 @@ interface IUser {
   name: string;
   state: string;
   registered: string;
-  usage: number;
+  usage: String;
   period: string;
   buttonLabel: string;
   avatar: string;
@@ -60,10 +60,10 @@ export class DashboardComponent implements OnInit {
     {
       id: '1',
       name: 'Rafaela Fuentes',
-      state: 'ING',
-      registered: 'NRC:5493',
-      usage: 50,
-      period: 'Primer semestre 2025',
+      state: '',
+      registered: 'Traumatólogia',
+      usage: 'Providencia',
+      period: '',
       avatar: './assets/images/avatars/1.jpg',
       status: 'success',
       buttonLabel: 'Responder'
@@ -71,10 +71,10 @@ export class DashboardComponent implements OnInit {
     {
       id: '2',
       name: 'Tomás Acevedo',
-      state: 'ICIF ',
-      registered: 'NRC:6589',
-      usage: 10,
-      period: 'Primer semestre 2025',
+      state: ' ',
+      registered: 'Kinesiología',
+      usage: 'Providencia',
+      period: '',
       avatar: './assets/images/avatars/2.jpg',
       status: 'danger',
       buttonLabel: 'Responder'
@@ -82,10 +82,10 @@ export class DashboardComponent implements OnInit {
     {
       id: '3',
       name: 'Gustavo Mondaca',
-      state: 'ING',
-      registered: 'NRC:5465',
-      usage: 74,
-      period: 'Primer semestre 2025',
+      state: '',
+      registered: 'Hotorrinolaringología',
+      usage: 'Cerrillos',
+      period: '',
       avatar: './assets/images/avatars/3.jpg',
       status: 'warning',
       buttonLabel: 'Responder'
@@ -93,10 +93,10 @@ export class DashboardComponent implements OnInit {
     {
       id: '4',
       name: 'Fabiola Alvarado',
-      state: 'ICIF',
-      registered: 'NRC:6578',
-      usage: 98,
-      period: 'Primer semestre 2025',
+      state: '',
+      registered: 'Dermatología',
+      usage: 'Las Condes',
+      period: '',
       avatar: './assets/images/avatars/4.jpg',
       status: 'secondary',
       buttonLabel: 'Responder'
@@ -104,10 +104,10 @@ export class DashboardComponent implements OnInit {
     {
       id: '5',
       name: 'Agatha Ruiz',
-      state: 'ING',
-      registered: 'NRC:5466',
-      usage: 22,
-      period: 'Primer semestre 2025',
+      state: '',
+      registered: 'Kinesiología',
+      usage: 'La florida',
+      period: '',
       avatar: './assets/images/avatars/5.jpg',
       status: 'success',
       buttonLabel: 'Responder'
@@ -115,10 +115,10 @@ export class DashboardComponent implements OnInit {
     {
       id: '6',
       name: 'Dávid Bisbal',
-      state: 'ICIF',
-      registered: 'NRC:6514',
-      usage: 43,
-      period: 'Primer semestre 2025',
+      state: '',
+      registered: 'Dermatología',
+      usage: 'San Miguel',
+      period: '',
       avatar: './assets/images/avatars/6.jpg',
       status: 'info',
       buttonLabel: 'Responder'

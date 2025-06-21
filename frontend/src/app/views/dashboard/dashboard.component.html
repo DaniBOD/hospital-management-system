@@ -16,9 +16,9 @@
             <th class="bg-body-tertiary text-center ">
               <svg cIcon name="cilPeople"></svg>
             </th>
-            <th class="bg-body-tertiary">Profesor/a</th>
-            <th class="bg-body-tertiary">Progreso</th>
-            <th class="bg-body-tertiary">Evaluaciones históricas</th>
+            <th class="bg-body-tertiary">Doctor/a</th>
+            <th class="bg-body-tertiary">Sede</th>
+            <th class="bg-body-tertiary">Disponivilidad</th>
           </tr>
           </thead>
           <tbody>
@@ -38,7 +38,7 @@
                 <td>
                   <div class="d-flex justify-content-between">
                     <div class="float-start">
-                      <strong>{{ user.usage }}%</strong>
+                      <strong>{{ user.usage }}</strong>
                     </div>
                     <div class="float-end ms-1 text-nowrap">
                       <small class="text-body-secondary">
@@ -49,7 +49,7 @@
                 </td>
                 <td>
                   <button cButton color="info" (click)="verHistorica(user)">
-                    Ver histórico
+                    Ver disponibilidad
                   </button>
                 </td>
                 

@@ -32,7 +32,7 @@ interface IUser {
   state: string;
   registered: string;
   country: string;
-  usage: number;
+  usage: String;
   period: string;
   buttonLabel: string;
   activity: string;
@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
       state: 'New',
       registered: 'Jan 1, 2021',
       country: 'Us',
-      usage: 50,
+      usage: 'Providencia',
       period: 'Jun 11, 2021 - Jul 10, 2021',
       buttonLabel: 'Mastercard',
       activity: '10 sec ago',
@@ -72,7 +72,7 @@ export class DashboardComponent implements OnInit {
       state: 'Recurring ',
       registered: 'Jan 1, 2021',
       country: 'Br',
-      usage: 10,
+      usage: 'Providencia',
       period: 'Jun 11, 2021 - Jul 10, 2021',
       buttonLabel: 'Visa',
       activity: '5 minutes ago',
@@ -85,7 +85,7 @@ export class DashboardComponent implements OnInit {
       state: 'New',
       registered: 'Jan 1, 2021',
       country: 'In',
-      usage: 74,
+      usage: 'Cerrillos',
       period: 'Jun 11, 2021 - Jul 10, 2021',
       buttonLabel: 'Stripe',
       activity: '1 hour ago',
@@ -98,7 +98,7 @@ export class DashboardComponent implements OnInit {
       state: 'Sleep',
       registered: 'Jan 1, 2021',
       country: 'Fr',
-      usage: 98,
+      usage: 'Las Condes',
       period: 'Jun 11, 2021 - Jul 10, 2021',
       buttonLabel: 'Paypal',
       activity: 'Last month',
@@ -111,7 +111,7 @@ export class DashboardComponent implements OnInit {
       state: 'New',
       registered: 'Jan 1, 2021',
       country: 'Es',
-      usage: 22,
+      usage: 'La Florida',
       period: 'Jun 11, 2021 - Jul 10, 2021',
       buttonLabel: 'ApplePay',
       activity: 'Last week',
@@ -124,7 +124,7 @@ export class DashboardComponent implements OnInit {
       state: 'New',
       registered: 'Jan 1, 2021',
       country: 'Pl',
-      usage: 43,
+      usage: 'San Miguel',
       period: 'Jun 11, 2021 - Jul 10, 2021',
       buttonLabel: 'Amex',
       activity: 'Yesterday',
