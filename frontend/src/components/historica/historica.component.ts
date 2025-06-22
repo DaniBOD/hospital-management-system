@@ -1,604 +1,146 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-historica',
+  selector: 'app-disponibilidad',
   templateUrl: './historica.component.html',
   styleUrls: ['./historica.component.scss'],
   standalone: true,
   imports: [CommonModule, FormsModule]
 })
 export class HistoricaComponent {
-  selectedProfessorId: string | null = null;
-  selectedYear: string = '';
-  selectedSemester: string = ''; // <-- Nuevo filtro
+  selectedDoctorId: string | null = null;
+  selectedDay: string = '';
 
-  professors = [
-    { id: '1', name: 'Rafaela Fuentes', avatar: 'assets/images/avatars/1.jpg' },
-    { id: '2', name: 'Tomás Acevedo', avatar: 'assets/images/avatars/2.jpg' },
-    { id: '3', name: 'Gustavo Mondaca', avatar: 'assets/images/avatars/3.jpg' },
-    { id: '4', name: 'Fabiola Alvarado', avatar: 'assets/images/avatars/4.jpg' },
-    { id: '5', name: ' Agatha Ruiz', avatar: 'assets/images/avatars/5.jpg' },
-    { id: '6', name: 'Dávid Bisbal', avatar: 'assets/images/avatars/6.jpg' }
+  doctors = [
+    { id: '1', name: 'Dra. María Rodríguez', specialty: 'Cardiología', avatar: 'assets/images/doctors/1.jpg' },
+    { id: '2', name: 'Dr. Carlos Méndez', specialty: 'Pediatría', avatar: 'assets/images/doctors/2.jpg' },
+    { id: '3', name: 'Dra. Laura Sánchez', specialty: 'Dermatología', avatar: 'assets/images/doctors/3.jpg' },
+    { id: '4', name: 'Dr. Javier López', specialty: 'Ortopedia', avatar: 'assets/images/doctors/4.jpg' },
+    { id: '5', name: 'Dra. Ana Fernández', specialty: 'Ginecología', avatar: 'assets/images/doctors/5.jpg' }
   ];
 
-  years: string[] = [];
+  days: string[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
-  allEvaluations = [
+  allSchedules = [
     {
       id: '1',
-      professorId: '1',
-      course: 'Ingles III',
-      year: '2023',
-      semester: 'S1', // <-- Nuevo campo
-      average: 6.2,
-      metrics: [
-        { name: 'Conocimiento', score: 6.5 },
-        { name: 'Claridad', score: 5.5},
-        { name: 'Disponibilidad', score: 6.7 },
-        { name: 'Materiales', score: 6.0 }
-      ],
-      comments: 'Excelente dominio del tema, aunque a veces va muy rápido en las explicaciones.'
-    }, 
-   {
-      id: '1',
-      professorId: '1',
-      course: 'Ingles III',
-      year: '2023',
-      semester: 'S2', // <-- Nuevo campo
-      average: 6.2,
-      metrics: [
-        { name: 'Conocimiento', score: 6.5 },
-        { name: 'Claridad', score: 5.5},
-        { name: 'Disponibilidad', score: 6.7 },
-        { name: 'Materiales', score: 6.0 }
-      ],
-      comments: 'Excelente dominio del tema, aunque a veces va muy rápido en las explicaciones.'
-    },
-    {
-      id: '1',
-      professorId: '1',
-      course: 'Ingles III',
-      year: '2022',
-      semester: 'S1', // <-- Nuevo campo
-      average: 4.5,
-      metrics: [
-        { name: 'Conocimiento', score: 4.5 },
-        { name: 'Claridad', score: 4.5},
-        { name: 'Disponibilidad', score: 4.7 },
-        { name: 'Materiales', score: 4.2 }
-      ],
-      comments: 'Escaso dominio del tema, va muy rápido en las explicaciones.'
-    },
-    {
-      id: '1',
-      professorId: '1',
-      course: 'Ingles III',
-      year: '2022',
-      semester: 'S2', // <-- Nuevo campo
-      average: 4.0,
-      metrics: [
-        { name: 'Conocimiento', score: 4.5 },
-        { name: 'Claridad', score: 4.5},
-        { name: 'Disponibilidad', score: 4.7 },
-        { name: 'Materiales', score: 4.2 }
-      ],
-      comments: 'Escaso dominio del tema, va muy rápido en las explicaciones.'
-    },
-     {
-      id: '1',
-      professorId: '1',
-      course: 'Ingles III',
-      year: '2024',
-      semester: 'S1',
-      average: 6.5,
-      metrics: [
-        { name: 'Conocimiento', score: 6.5 },
-        { name: 'Claridad', score: 6.5},
-        { name: 'Disponibilidad', score: 6.7 },
-        { name: 'Materiales', score: 6.3 }
-      ],
-      comments: 'Planteamiento de actividades muy interesantes.'
-    },
-     {
-      id: '1',
-      professorId: '1',
-      course: 'Ingles III',
-      year: '2024',
-      semester: 'S2',
-      average: 6.5,
-      metrics: [
-        { name: 'Conocimiento', score: 6.5 },
-        { name: 'Claridad', score: 6.5},
-        { name: 'Disponibilidad', score: 6.7 },
-        { name: 'Materiales', score: 6.3 }
-      ],
-      comments: 'Planteamiento de actividades muy interesantes.'
+      doctorId: '1',
+      day: 'Lunes',
+      startTime: '08:00',
+      endTime: '12:00',
+      room: 'Consultorio 101',
+      status: 'Disponible'
     },
     {
       id: '2',
-      professorId: '2',
-      course: 'Paradigmas de la programación',
-      year: '2022',
-      semester: 'S1',
-      average: 5.8,
-      metrics: [
-        { name: 'Conocimiento', score: 5.5 },
-        { name: 'Claridad', score: 5.8 },
-        { name: 'Disponibilidad', score: 5.7 },
-        { name: 'Materiales', score: 6.0 }
-      ],
-      comments: 'Muy buen profesor, pero podría mejorar la claridad.'
-    },
-    {
-      id: '2',
-      professorId: '2',
-      course: 'Paradigmas de la programación',
-      year: '2022',
-      semester: 'S2',
-      average: 5.8,
-      metrics: [
-        { name: 'Conocimiento', score: 5.5 },
-        { name: 'Claridad', score: 5.8 },
-        { name: 'Disponibilidad', score: 5.7 },
-        { name: 'Materiales', score: 6.0 }
-      ],
-      comments: 'Muy buen profesor, pero podría mejorar la claridad.'
-    },
-   {
-      id: '2',
-      professorId: '2',
-      course: 'Paradigmas de la programación',
-      year: '2023',
-      semester: 'S1',
-      average: 4.8,
-      metrics: [
-        { name: 'Conocimiento', score: 5.5 },
-        { name: 'Claridad', score: 4.8 },
-        { name: 'Disponibilidad', score: 4.7 },
-        { name: 'Materiales', score: 5.0 }
-      ],
-      comments: ' Podría mejorar la claridad.'
-    },
-       {
-      id: '2',
-      professorId: '2',
-      course: 'Paradigmas de la programación',
-      year: '2023',
-      semester: 'S2',
-      average: 4.8,
-      metrics: [
-        { name: 'Conocimiento', score: 5.5 },
-        { name: 'Claridad', score: 4.8 },
-        { name: 'Disponibilidad', score: 4.7 },
-        { name: 'Materiales', score: 5.0 }
-      ],
-      comments: ' Podría mejorar la claridad.'
-    },
-   {
-      id: '2',
-      professorId: '2',
-      course: 'Paradigmas de la programación',
-      year: '2024',
-      semester: 'S1',
-      average: 4.8,
-      metrics: [
-        { name: 'Conocimiento', score: 5.5 },
-        { name: 'Claridad', score: 4.8 },
-        { name: 'Disponibilidad', score: 4.7 },
-        { name: 'Materiales', score: 5.0 }
-      ],
-      comments: ' Podría mejorar la claridad.'
-    },
-   {
-      id: '2',
-      professorId: '2',
-      course: 'Paradigmas de la programación',
-      year: '2024',
-      semester: 'S2',
-      average: 4.8,
-      metrics: [
-        { name: 'Conocimiento', score: 5.5 },
-        { name: 'Claridad', score: 4.8 },
-        { name: 'Disponibilidad', score: 4.7 },
-        { name: 'Materiales', score: 5.0 }
-      ],
-      comments: ' Podría mejorar la claridad.'
+      doctorId: '1',
+      day: 'Miércoles',
+      startTime: '14:00',
+      endTime: '18:00',
+      room: 'Consultorio 101',
+      status: 'Disponible'
     },
     {
       id: '3',
-      professorId: '3',
-      course: 'Electricidad y Magnetismo',
-      year: '2024',
-      semester: 'S1',
-      average: 5.9,
-      metrics: [
-        { name: 'Conocimiento', score: 5.7 },
-        { name: 'Claridad', score: 5.8 },
-        { name: 'Disponibilidad', score: 6.0 },
-        { name: 'Materiales', score: 6.0 }
-      ],
-      comments: 'Explica bien, pero a veces falta material de apoyo.'
-    },
-    {
-      id: '3',
-      professorId: '3',
-      course: 'Electricidad y Magnetismo',
-      year: '2024',
-      semester: 'S2',
-      average: 5.9,
-      metrics: [
-        { name: 'Conocimiento', score: 5.7 },
-        { name: 'Claridad', score: 5.8 },
-        { name: 'Disponibilidad', score: 6.0 },
-        { name: 'Materiales', score: 6.0 }
-      ],
-      comments: 'Explica bien, pero a veces falta material de apoyo.'
-    },
-    {
-      id: '3',
-      professorId: '3',
-      course: 'Electricidad y Magnetismo',
-      year: '2023',
-      semester: 'S1',
-      average: 5.4,
-      metrics: [
-        { name: 'Conocimiento', score: 5.3 },
-        { name: 'Claridad', score: 5.5 },
-        { name: 'Disponibilidad', score: 5.5 },
-        { name: 'Materiales', score: 5.3 }
-      ],
-      comments: 'Explica bien.'
-    },
-    {
-      id: '3',
-      professorId: '3',
-      course: 'Electricidad y Magnetismo',
-      year: '2023',
-      semester: 'S2',
-      average: 5.4,
-      metrics: [
-        { name: 'Conocimiento', score: 5.3 },
-        { name: 'Claridad', score: 5.5 },
-        { name: 'Disponibilidad', score: 5.5 },
-        { name: 'Materiales', score: 5.3 }
-      ],
-      comments: 'Explica bien.'
-    },
-   {
-      id: '3',
-      professorId: '3',
-      course: 'Electricidad y Magnetismo',
-      year: '2022',
-      semester: 'S1',
-      average: 5.0,
-      metrics: [
-        { name: 'Conocimiento', score: 5.0 },
-        { name: 'Claridad', score: 4.3 },
-        { name: 'Disponibilidad', score: 4.5 },
-        { name: 'Materiales', score: 5.3 }
-      ],
-      comments: 'Deberia tomar en cuenta que no todos los alumnos tienen el mismo nivel de conocimiento previo.'
-    },
-   {
-      id: '3',
-      professorId: '3',
-      course: 'Electricidad y Magnetismo',
-      year: '2022',
-      semester: 'S2',
-      average: 5.0,
-      metrics: [
-        { name: 'Conocimiento', score: 5.0 },
-        { name: 'Claridad', score: 4.3 },
-        { name: 'Disponibilidad', score: 4.5 },
-        { name: 'Materiales', score: 5.3 }
-      ],
-      comments: 'Deberia tomar en cuenta que no todos los alumnos tienen el mismo nivel de conocimiento previo.'
+      doctorId: '2',
+      day: 'Martes',
+      startTime: '09:00',
+      endTime: '13:00',
+      room: 'Consultorio 205',
+      status: 'Disponible'
     },
     {
       id: '4',
-      professorId: '4',
-      course: 'Base de datos',
-      year: '2022',
-      semester: 'S1',
-      average: 6.9,
-      metrics: [
-        { name: 'Conocimiento', score: 6.9 },
-        { name: 'Claridad', score: 7.0 },
-        { name: 'Disponibilidad', score: 6.8 },
-        { name: 'Materiales', score: 7.0 }
-      ],
-      comments: 'Muy dedicada y clara en sus explicaciones.'
-    },
-      {
-      id: '4',
-      professorId: '4',
-      course: 'Base de datos',
-      year: '2022',
-      semester: 'S2',
-      average: 6.9,
-      metrics: [
-        { name: 'Conocimiento', score: 6.9 },
-        { name: 'Claridad', score: 7.0 },
-        { name: 'Disponibilidad', score: 6.8 },
-        { name: 'Materiales', score: 7.0 }
-      ],
-      comments: 'Muy dedicada y clara en sus explicaciones.'
-    },
-    {
-      id: '4',
-      professorId: '4',
-      course: 'Base de datos',
-      year: '2023',
-      semester: 'S1',
-      average: 6.4,
-      metrics: [
-        { name: 'Conocimiento', score: 6.4 },
-        { name: 'Claridad', score: 6.0 },
-        { name: 'Disponibilidad', score: 6.5 },
-        { name: 'Materiales', score: 6.7}
-      ],
-      comments: 'Muy dedicada y clara en sus explicaciones.'
-    },
-    {
-      id: '4',
-      professorId: '4',
-      course: 'Base de datos',
-      year: '2023',
-      semester: 'S2',
-      average: 6.4,
-      metrics: [
-        { name: 'Conocimiento', score: 6.4 },
-        { name: 'Claridad', score: 6.0 },
-        { name: 'Disponibilidad', score: 6.5 },
-        { name: 'Materiales', score: 6.7}
-      ],
-      comments: 'Muy dedicada y clara en sus explicaciones.'
-    },
-    {
-      id: '4',
-      professorId: '4',
-      course: 'Base de datos',
-      year: '2024',
-      semester: 'S1',
-      average: 6.6,
-      metrics: [
-        { name: 'Conocimiento', score: 6.6 },
-        { name: 'Claridad', score: 6.6 },
-        { name: 'Disponibilidad', score: 6.8 },
-        { name: 'Materiales', score: 6.3}
-      ],
-      comments: 'Muy dedicada y clara en sus explicaciones.'
-    },
-    {
-      id: '4',
-      professorId: '4',
-      course: 'Base de datos',
-      year: '2024',
-      semester: 'S2',
-      average: 6.6,
-      metrics: [
-        { name: 'Conocimiento', score: 6.6 },
-        { name: 'Claridad', score: 6.6 },
-        { name: 'Disponibilidad', score: 6.8 },
-        { name: 'Materiales', score: 6.3}
-      ],
-      comments: 'Muy dedicada y clara en sus explicaciones.'
+      doctorId: '2',
+      day: 'Jueves',
+      startTime: '15:00',
+      endTime: '19:00',
+      room: 'Consultorio 205',
+      status: 'No disponible'
     },
     {
       id: '5',
-      professorId: '5',
-      course: 'Calculo III',
-      year: '2024',
-      semester: 'S1',
-      average: 2.8,
-      metrics: [
-        { name: 'Conocimiento', score: 2.5 },
-        { name: 'Claridad', score: 2.8 },
-        { name: 'Disponibilidad', score: 2.7 },
-        { name: 'Materiales', score: 3.0 }
-      ],
-      comments: 'Podría mejorar la disponibilidad para consultas.'
-    },
-    {
-      id: '5',
-      professorId: '5',
-      course: 'Calculo III',
-      year: '2024',
-      semester: 'S2',
-      average: 2.8,
-      metrics: [
-        { name: 'Conocimiento', score: 2.5 },
-        { name: 'Claridad', score: 2.8 },
-        { name: 'Disponibilidad', score: 2.7 },
-        { name: 'Materiales', score: 3.0 }
-      ],
-      comments: 'Podría mejorar la disponibilidad para consultas.'
-    },
-    {
-      id: '5',
-      professorId: '5',
-      course: 'Calculo III',
-      year: '2023',
-      semester: 'S1',
-      average: 3.8,
-      metrics: [
-        { name: 'Conocimiento', score: 4.5 },
-        { name: 'Claridad', score: 3.8 },
-        { name: 'Disponibilidad', score: 3.7 },
-        { name: 'Materiales', score: 3.0 }
-      ],
-      comments: 'Podría mejorar la disponibilidad para consultas.'
-    },
-    {
-      id: '5',
-      professorId: '5',
-      course: 'Calculo III',
-      year: '2023',
-      semester: 'S2',
-      average: 3.8,
-      metrics: [
-        { name: 'Conocimiento', score: 4.5 },
-        { name: 'Claridad', score: 3.8 },
-        { name: 'Disponibilidad', score: 3.7 },
-        { name: 'Materiales', score: 3.0 }
-      ],
-      comments: 'Podría mejorar la disponibilidad para consultas.'
-    },
-    {
-      id: '5',
-      professorId: '5',
-      course: 'Calculo III',
-      year: '2022',
-      semester: 'S1',
-      average: 4.8,
-      metrics: [
-        { name: 'Conocimiento', score: 4.5 },
-        { name: 'Claridad', score: 4.8 },
-        { name: 'Disponibilidad', score: 4.7 },
-        { name: 'Materiales', score: 5.0 }
-      ],
-      comments: 'Podría mejorar la disponibilidad para consultas.'
-    },
-    {
-      id: '5',
-      professorId: '5',
-      course: 'Calculo III',
-      year: '2022',
-      semester: 'S2',
-      average: 4.8,
-      metrics: [
-        { name: 'Conocimiento', score: 4.5 },
-        { name: 'Claridad', score: 4.8 },
-        { name: 'Disponibilidad', score: 4.7 },
-        { name: 'Materiales', score: 5.0 }
-      ],
-      comments: 'Podría mejorar la disponibilidad para consultas.'
+      doctorId: '3',
+      day: 'Lunes',
+      startTime: '10:00',
+      endTime: '14:00',
+      room: 'Consultorio 302',
+      status: 'Disponible'
     },
     {
       id: '6',
-      professorId: '6',
-      course: 'Estructura y algoritmos',
-      year: '2022',
-      semester: 'S1',
-      average: 3.4,
-      metrics: [
-        { name: 'Conocimiento', score: 3.5 },
-        { name: 'Claridad', score: 2.8 },
-        { name: 'Disponibilidad', score: 3.5 },
-        { name: 'Materiales', score: 4.0 }
-      ],
-      comments: 'Le falta experiencia, pero es amable.'
-    },  
-    {
-      id: '6',
-      professorId: '6',
-      course: 'Estructura y algoritmos',
-      year: '2022',
-      semester: 'S2',
-      average: 3.4,
-      metrics: [
-        { name: 'Conocimiento', score: 3.5 },
-        { name: 'Claridad', score: 2.8 },
-        { name: 'Disponibilidad', score: 3.5 },
-        { name: 'Materiales', score: 4.0 }
-      ],
-      comments: 'Le falta experiencia, pero es amable.'
-    }, 
-    {
-      id: '6',
-      professorId: '6',
-      course: 'Estructura y algoritmos',
-      year: '2023',
-      semester: 'S1',
-      average: 5.4,
-      metrics: [
-        { name: 'Conocimiento', score: 5.5 },
-        { name: 'Claridad', score: 5.8 },
-        { name: 'Disponibilidad', score: 4.5 },
-        { name: 'Materiales', score: 6.0 }
-      ],
-      comments: 'Le falta experiencia, pero es amable.'
-    },  
-    {
-      id: '6',
-      professorId: '6',
-      course: 'Estructura y algoritmos',
-      year: '2023',
-      semester: 'S2',
-      average: 5.4,
-      metrics: [
-        { name: 'Conocimiento', score: 5.5 },
-        { name: 'Claridad', score: 5.8 },
-        { name: 'Disponibilidad', score: 4.5 },
-        { name: 'Materiales', score: 6.0 }
-      ],
-      comments: 'Le falta experiencia, pero es amable.'
-    }, 
-   {
-      id: '6',
-      professorId: '6',
-      course: 'Estructura y algoritmos',
-      year: '2024',
-      semester: 'S1',
-      average: 6.4,
-      metrics: [
-        { name: 'Conocimiento', score: 6.5 },
-        { name: 'Claridad', score: 6.8 },
-        { name: 'Disponibilidad', score: 5.5 },
-        { name: 'Materiales', score: 6.0 }
-      ],
-      comments: 'Le falta experiencia, pero es amable.'
+      doctorId: '3',
+      day: 'Viernes',
+      startTime: '08:00',
+      endTime: '12:00',
+      room: 'Consultorio 302',
+      status: 'Disponible'
     },
-       {
-      id: '6',
-      professorId: '6',
-      course: 'Estructura y algoritmos',
-      year: '2024',
-      semester: 'S2',
-      average: 6.4,
-      metrics: [
-        { name: 'Conocimiento', score: 6.5 },
-        { name: 'Claridad', score: 6.8 },
-        { name: 'Disponibilidad', score: 5.5 },
-        { name: 'Materiales', score: 6.0 }
-      ],
-      comments: 'Le falta experiencia, pero es amable.'
+    {
+      id: '7',
+      doctorId: '4',
+      day: 'Miércoles',
+      startTime: '07:00',
+      endTime: '11:00',
+      room: 'Consultorio 410',
+      status: 'No disponible'
+    },
+    {
+      id: '8',
+      doctorId: '4',
+      day: 'Sábado',
+      startTime: '09:00',
+      endTime: '13:00',
+      room: 'Consultorio 410',
+      status: 'Disponible'
+    },
+    {
+      id: '9',
+      doctorId: '5',
+      day: 'Martes',
+      startTime: '12:00',
+      endTime: '16:00',
+      room: 'Consultorio 512',
+      status: 'Disponible'
+    },
+    {
+      id: '10',
+      doctorId: '5',
+      day: 'Jueves',
+      startTime: '08:00',
+      endTime: '12:00',
+      room: 'Consultorio 512',
+      status: 'Disponible'
     }
-
   ];
 
-  filteredEvaluations: any[] = [];
-
-  constructor(private route: ActivatedRoute) {
-    this.route.queryParams.subscribe(params => {
-      this.selectedProfessorId = params['profesorId'] || null;
-      this.applyFilters();
-    });
-  }
+  filteredSchedules: any[] = [];
 
   ngOnInit() {
-    // Extrae los años únicos de las evaluaciones
-    this.years = Array.from(new Set(this.allEvaluations.map(e => e.year)));
     this.applyFilters();
   }
 
   applyFilters() {
-    this.filteredEvaluations = this.allEvaluations
-      .filter(evaluation => {
-        const professorMatch = !this.selectedProfessorId || evaluation.professorId === this.selectedProfessorId;
-        const yearMatch = !this.selectedYear || evaluation.year === this.selectedYear;
-        const semesterMatch = !this.selectedSemester || evaluation.semester === this.selectedSemester; // <-- Nuevo filtro
-        return professorMatch && yearMatch && semesterMatch;
+    this.filteredSchedules = this.allSchedules
+      .filter(schedule => {
+        const doctorMatch = !this.selectedDoctorId || schedule.doctorId === this.selectedDoctorId;
+        const dayMatch = !this.selectedDay || schedule.day === this.selectedDay;
+        return doctorMatch && dayMatch;
       })
-      .map(evaluation => {
-        const professor = this.professors.find(p => p.id === evaluation.professorId);
+      .map(schedule => {
+        const doctor = this.doctors.find(d => d.id === schedule.doctorId);
         return {
-          ...evaluation,
-          professor
+          ...schedule,
+          doctor
         };
       });
+  }
+
+  bookAppointment(schedule: any) {
+    // Lógica para reservar cita
+    console.log('Cita reservada con:', schedule.doctor.name);
+    alert(`Cita reservada con ${schedule.doctor.name} el ${schedule.day} a las ${schedule.startTime}`);
   }
 }

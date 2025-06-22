@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NgScrollbar } from 'ngx-scrollbar';
 
@@ -26,9 +26,10 @@ function isOverflown(element: HTMLElement) {
 }
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-default-layout',
   templateUrl: './default-layout.component.html',
   styleUrls: ['./default-layout.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   imports: [
     SidebarComponent,
     SidebarHeaderComponent,

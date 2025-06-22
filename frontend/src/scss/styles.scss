@@ -21,3 +21,10 @@
 // We use those styles to show code examples, you should remove them in your application.
 @use "examples";
 
+app-default-header.header-sticky,
+app-default-header .header-sticky,
+.header-sticky {
+  background-color: #019EB0 !important;
+  color: #fff !important;
+}
+
