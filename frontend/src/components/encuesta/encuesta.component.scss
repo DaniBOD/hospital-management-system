@@ -1,0 +1,151 @@
+.encuesta-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  .encuesta-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 0.5rem;
+    }
+    
+    p {
+      color: #7f8c8d;
+      font-size: 0.95rem;
+    }
+  }
+
+  .encuesta-form {
+    .pregunta {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      
+      .pregunta-texto {
+        color: #34495e;
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+      }
+
+      .escala-numerica {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+
+        .opcion-numero {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          
+          input[type="radio"] {
+            display: none;
+            
+            & + label {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              background-color: #ecf0f1;
+              color: #2c3e50;
+              cursor: pointer;
+              transition: all 0.2s;
+              font-weight: 500;
+            }
+            
+            &:checked + label {
+              background-color: #3498db;
+              color: white;
+              transform: scale(1.1);
+            }
+            
+            &:hover + label {
+              background-color: #d6eaf8;
+            }
+          }
+        }
+      }
+    }
+
+    .comentarios-section {
+      margin: 2rem 0;
+      
+      h3 {
+        color: #34495e;
+        margin-bottom: 1rem;
+      }
+      
+      .comentarios-input {
+        width: 100%;
+        min-height: 120px;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        resize: vertical;
+        font-family: inherit;
+        font-size: 0.95rem;
+        
+        &:focus {
+          outline: none;
+          border-color: #3498db;
+          box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+      }
+    }
+  }
+
+  .encuesta-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+
+    .submit-btn {
+      padding: 0.75rem 2rem;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #2980b9;
+      }
+
+      &:disabled {
+        background-color: #95a5a6;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .encuesta-container {
+    padding: 1rem;
+    margin: 1rem;
+
+    .escala-numerica {
+      flex-wrap: wrap;
+      justify-content: center !important;
+      
+      .opcion-numero {
+        margin: 0.25rem;
+      }
+    }
+  }
+}

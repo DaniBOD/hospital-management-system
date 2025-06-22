@@ -1,0 +1,13 @@
+<div>
+  <h2>Encuesta Docente</h2>
+  <form (ngSubmit)="submitForm()">
+    <div *ngFor="let pregunta of preguntas; let i = index">
+      <h3>{{ pregunta.texto }}</h3>
+      <div *ngFor="let opcion of pregunta.opcion">
+        <input type="radio" name="{{i}}" [value]="opcion" [(ngModel)]="pregunta.respuesta">
+        <label>{{ opcion }}</label><br>
+      </div>
+    </div>
+    <button type="submit">Enviar</button>
+  </form>
+</div>
