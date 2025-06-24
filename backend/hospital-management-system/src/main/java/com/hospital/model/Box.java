@@ -16,9 +16,12 @@ public class Box {
     private String nombre;
     private int piso;
     private boolean disponible;
+    
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Horario horario;
+    @ManyToOne
+    private Especialista especialista;
 
     // --- Métodos de dominio ---
 
@@ -79,6 +82,13 @@ public class Box {
 
     public void setPiso(int piso) {
         this.piso = piso;
+    }
+    public Especialista getEspecialista() {
+        return especialista;
+    }
+
+    public void setEspecialista(Especialista especialista) {
+        this.especialista = especialista;
     }
 
     public boolean isDisponible() {

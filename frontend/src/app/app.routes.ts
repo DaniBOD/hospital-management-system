@@ -1,10 +1,15 @@
 import { Routes } from '@angular/router';
 import { DefaultLayoutComponent } from './layout';
 import { EncuestaComponent } from '../components/encuesta/encuesta.component'; // Ajusta la ruta si es necesario
+import { UsuariosListComponent } from '../components/usuarios-list/usuarios-list.component';
 
 
 
 export const routes: Routes = [
+  { 
+    path: 'usuarios', 
+    component: UsuariosListComponent 
+  },
   {
     path: '',
     redirectTo: 'dashboard',
@@ -17,6 +22,26 @@ export const routes: Routes = [
       title: 'Home'
     },
     children: [
+      {
+        path: 'boxes',
+        loadComponent: () => import('../components/box/box-list.component').then(m => m.BoxListComponent)
+      },
+      {
+        path: 'boxes/crear',
+        loadComponent: () => import('../components/box/box-crear.component').then(m => m.BoxCrearComponent)
+      },
+      {
+        path: 'boxes/editar/:id',
+        loadComponent: () => import('../components/box/box-editar.component').then(m => m.BoxEditarComponent)
+      },
+      {
+        path: 'usuarios/editar/:id',
+        loadComponent: () => import('../components/usuario-editar/usuario-editar.component').then(m => m.UsuarioEditarComponent)
+      },
+      {
+        path: 'usuarios/crear',
+        loadComponent: () => import('../components/usuario-crear/usuario-crear.component').then(m => m.UsuarioCrearComponent)
+      },
       {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes)

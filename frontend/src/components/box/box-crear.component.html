@@ -1,0 +1,68 @@
+<div class="container mt-4">
+  <h2>Crear Box</h2>
+  <form (ngSubmit)="crearBox()">
+    <div class="mb-3">
+      <label class="form-label">Nombre</label>
+      <input [(ngModel)]="box.nombre" name="nombre" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Piso</label>
+      <input type="number" [(ngModel)]="box.piso" name="piso" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Especialista</label>
+      <select [(ngModel)]="box.especialista" name="especialista" class="form-select" required>
+        <option [ngValue]="undefined">-- Selecciona un especialista --</option>
+        <option *ngFor="let esp of especialistas" [ngValue]="esp">
+          {{ esp.nombre }} - {{ esp.especialidad }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" [(ngModel)]="box.disponible" name="disponible" class="form-check-input" />
+      <label class="form-check-label">Disponible</label>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Días disponibles</label><br />
+      <div class="form-check form-check-inline" *ngFor="let dia of diasDeLaSemana">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          [checked]="box.horario.diasDisponibles.includes(dia)"
+          (change)="onToggleDia(dia)"
+        />
+        <label class="form-check-label">{{ dia }}</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Hora Inicio</label>
+      <input
+        type="time"
+        [(ngModel)]="box.horario.horaInicio"
+        name="horaInicio"
+        class="form-control"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Hora Fin</label>
+      <input
+        type="time"
+        [(ngModel)]="box.horario.horaFin"
+        name="horaFin"
+        class="form-control"
+        required
+      />
+    </div>
+
+    <button class="btn btn-primary" type="submit">Guardar</button>
+  </form>
+
+  <div *ngIf="mensaje" class="alert alert-info mt-3">{{ mensaje }}</div>
+</div>

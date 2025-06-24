@@ -8,6 +8,7 @@ import {
   withRouterConfig,
   withViewTransitions
 } from '@angular/router';
+import { provideHttpClient } from '@angular/common/http';
 
 import { DropdownModule, SidebarModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
@@ -15,7 +16,8 @@ import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes,
+    provideRouter(
+      routes,
       withRouterConfig({
         onSameUrlNavigation: 'reload'
       }),
@@ -29,6 +31,7 @@ export const appConfig: ApplicationConfig = {
     ),
     importProvidersFrom(SidebarModule, DropdownModule),
     IconSetService,
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient() // Habilita HttpClient globalmente
   ]
 };

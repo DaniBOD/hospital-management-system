@@ -2,7 +2,7 @@ import { INavData } from '@coreui/angular';
 
 export const navItems: INavData[] = [
   {
-    name: 'CampusLibre',
+    name: 'Intranet',
     url: '/dashboard',
     iconComponent: { name: 'cil-speedometer' },
     badge: {
@@ -18,6 +18,24 @@ export const navItems: INavData[] = [
     name: 'Evaluaciones',
     url: '/theme/colors',
     iconComponent: { name: 'cil-drop' }
+  },
+  {
+    title: true,
+    name: 'Usuarios'
+  },
+  {
+    name: 'Usuarios',
+    iconComponent: { name: 'cil-user' },
+    children: [
+      {
+        name: 'Listado',
+        url: '/usuarios'
+      },
+      {
+        name: 'Crear',
+        url: '/usuarios/crear'
+      }
+    ]
   },
   {
     title: true,
@@ -54,6 +72,20 @@ export const navItems: INavData[] = [
     title: true,
     name: 'Links',
     class: 'mt-auto'
+  },
+  {
+    name: 'Boxes',
+    iconComponent: { name: 'cil-building' },
+    children: [
+      {
+        name: 'Listado',
+        url: '/boxes'
+      },
+      {
+        name: 'Crear',
+        url: '/boxes/crear'
+      }
+    ]
   },
   {
     name: 'Encuesta',
